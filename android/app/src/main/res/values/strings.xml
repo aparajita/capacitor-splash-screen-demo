@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Splash</string>
+    <string name="title_activity_main">Splash</string>
+    <string name="package_name">com.aparajita.capacitor.splashscreendemo</string>
+    <string name="custom_url_scheme">com.aparajita.capacitor.splashscreendemo</string>
+    <string name="willsub">willSub</string>
+    <string name="greeting">Hi, I’m Max!</string>
+</resources>
