@@ -1,6 +1,6 @@
 {
-  "name": "ws-splashscreen-example",
-  "version": "0.0.1",
+  "name": "ws-capacitor-splashscreen-demo",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
