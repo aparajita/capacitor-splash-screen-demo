@@ -45,7 +45,7 @@ export default {
     // lifecycle
     onMounted(() => {
       const splash = Plugins.WSSplashScreen as WSSplashScreenWeb
-      splash.animate()
+      splash.animate({ delay: 200 })
     })
 
     return {

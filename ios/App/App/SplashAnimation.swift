@@ -46,11 +46,10 @@ extension AppDelegate {
 
     let spinner = params["spinner"] as? UIActivityIndicatorView
     let duration = options["duration"] as? Double ?? kDefaultDuration
-    let delay = options["delay"] as? TimeInterval ?? 0.0
 
     UIView.animateKeyframes(
       withDuration: duration,
-      delay: delay,
+      delay: 0,
       options: [],
       animations: {
         self.performAnimation(forView: view, spinner: spinner)
