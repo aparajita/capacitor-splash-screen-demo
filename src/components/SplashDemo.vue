@@ -9,7 +9,7 @@
           Source:
         </ion-label>
         <ion-select
-          v-model="source"
+          v-model="showOptions.source"
           interface="action-sheet"
           class="max-w-none pl-0"
         >
@@ -51,7 +51,7 @@
         >
           <ion-label>Delay:</ion-label>
           <ion-input
-            v-model.number="showDelay"
+            v-model.number="showOptions.showDelay"
             type="number"
           />
         </ion-item>
@@ -62,7 +62,7 @@
         >
           <ion-label>Duration:</ion-label>
           <ion-input
-            v-model.number="showDuration"
+            v-model.number="showOptions.showDuration"
             type="number"
           />
         </ion-item>
@@ -75,7 +75,7 @@
         >
           <ion-label>Fade in:</ion-label>
           <ion-input
-            v-model.number="showFadeInDuration"
+            v-model.number="showOptions.fadeInDuration"
             type="number"
           />
         </ion-item>
@@ -86,9 +86,9 @@
         >
           <ion-label>Fade out:</ion-label>
           <ion-input
-            v-model.number="showFadeOutDuration"
+            v-model.number="showOptions.fadeOutDuration"
             type="number"
-            :disabled="!autoHide"
+            :disabled="!showOptions.autoHide"
           />
         </ion-item>
       </div>
@@ -98,7 +98,7 @@
         class="flex"
       >
         <ion-label>Background:</ion-label>
-        <ion-input v-model="backgroundColor" />
+        <ion-input v-model="showOptions.backgroundColor" />
         <div
           class="w-5 h-5 mr-2 border border-solid"
           :style="showBackgroundStyle"
@@ -111,8 +111,8 @@
           class="flex-1"
         >
           <ion-checkbox
-            v-model="autoHide"
-            :disabled="animated"
+            v-model="showOptions.autoHide"
+            :disabled="showOptions.animated"
           />
           <ion-label>Autohide</ion-label>
         </ion-item>
@@ -122,8 +122,8 @@
           class="flex-1"
         >
           <ion-checkbox
-            v-model="animated"
-            :disabled="autoHide || source !== '*'"
+            v-model="showOptions.animated"
+            :disabled="showOptions.autoHide || showOptions.source !== '*'"
           />
           <ion-label>Animated</ion-label>
         </ion-item>
@@ -131,7 +131,7 @@
     </ion-item-group>
 
     <ion-item-group
-      v-if="!autoHide && !animated"
+      v-if="!showOptions.autoHide && !showOptions.animated"
       class="mt-5"
     >
       <ion-item-divider>
@@ -141,7 +141,7 @@
       </ion-item-divider>
 
       <div
-        v-if="!autoHide && !animated"
+        v-if="!showOptions.autoHide && !showOptions.animated"
         class="flex"
       >
         <ion-item
@@ -150,7 +150,7 @@
         >
           <ion-label>Delay:</ion-label>
           <ion-input
-            v-model.number="hideDelay"
+            v-model.number="hideOptions.delay"
             type="number"
           />
         </ion-item>
@@ -161,7 +161,7 @@
         >
           <ion-label>Fade out:</ion-label>
           <ion-input
-            v-model.number="hideFadeOutDuration"
+            v-model.number="hideOptions.fadeOutDuration"
             type="number"
           />
         </ion-item>
@@ -179,11 +179,11 @@
         lines="none"
         class="flex-1"
       >
-        <ion-checkbox v-model="showSpinner" />
+        <ion-checkbox v-model="showOptions.showSpinner" />
         <ion-label>Show spinner</ion-label>
       </ion-item>
 
-      <div v-if="showSpinner">
+      <div v-if="showOptions.showSpinner">
         <ion-item lines="none">
           <ion-label class="flex-none mr-2">
             Style:
@@ -191,7 +191,7 @@
 
           <ion-select
             v-if="isIOS"
-            v-model="iosSpinnerStyle"
+            v-model="showOptions.ios.spinnerStyle"
             interface="action-sheet"
             class="max-w-none pl-0"
           >
@@ -201,7 +201,7 @@
 
           <ion-select
             v-if="isAndroid"
-            v-model="androidSpinnerStyle"
+            v-model="showOptions.android.spinnerStyle"
             interface="action-sheet"
             class="max-w-none pl-0"
           >
@@ -217,7 +217,7 @@
 
         <ion-item lines="none">
           <ion-label>Color:</ion-label>
-          <ion-input v-model="spinnerColor" />
+          <ion-input v-model="showOptions.spinnerColor" />
           <div
             class="w-5 h-5 mr-2 border border-solid"
             :style="spinnerColorStyle"
@@ -227,7 +227,7 @@
     </ion-item-group>
 
     <ion-item-group
-      v-if="source === 'max'"
+      v-if="showOptions.source === 'max'"
       class="mt-5"
     >
       <ion-item-divider>
@@ -245,7 +245,7 @@
         </ion-label>
         <ion-select
           v-if="isIOS"
-          v-model="iosImageMode"
+          v-model="showOptions.ios.imageDisplayMode"
           interface="action-sheet"
           class="max-w-none pl-0"
         >
@@ -265,7 +265,7 @@
 
         <ion-select
           v-if="isAndroid"
-          v-model="androidImageMode"
+          v-model="showOptions.android.imageDisplayMode"
           interface="action-sheet"
           class="max-w-none pl-0"
         >
@@ -283,14 +283,10 @@
 
 <script lang="ts">
 import { Capacitor, Plugins } from '@capacitor/core'
-import { computed, defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, reactive, ref, toRaw, watch } from 'vue'
 import {
   PluginError,
-  WSSplashScreenAndroidImageDisplayMode,
-  WSSplashScreenAndroidSpinnerStyle,
   WSSplashScreenHideOptions,
-  WSSplashScreenIosImageDisplayMode,
-  WSSplashScreenIosSpinnerStyle,
   WSSplashScreenShowOptions,
   WSSplashScreenWeb
 } from 'ws-capacitor-splashscreen'
@@ -331,89 +327,82 @@ export default defineComponent({
 
     // ref
     const isDarkMode = ref(darkModeQuery.matches)
-    const androidImageMode = ref<WSSplashScreenAndroidImageDisplayMode>('fit')
-    const androidSpinnerStyle = ref<WSSplashScreenAndroidSpinnerStyle>('medium')
-    const animated = ref(false)
-    const autoHide = ref(false)
-    const backgroundColor = ref('')
-    const hideFadeOutDuration = ref(200)
-    const hideDelay = ref(0)
-    const iosImageMode = ref<WSSplashScreenIosImageDisplayMode>('fit')
-    const iosSpinnerStyle = ref<WSSplashScreenIosSpinnerStyle>('large')
-    const showDelay = ref(0)
-    const showDuration = ref(1.5)
-    const showFadeInDuration = ref(0.5)
-    const showFadeOutDuration = ref(200)
-    const showSpinner = ref(false)
-    const spinnerColor = ref('555')
-    const source = ref('*')
+
+    const showOptions = reactive<WSSplashScreenShowOptions>({
+      source: '*',
+      delay: 0,
+      fadeInDuration: 0.5,
+      showDuration: 1.5,
+      fadeOutDuration: 200,
+      autoHide: false,
+      animated: false,
+      backgroundColor: '',
+      showSpinner: false,
+      spinnerColor: '777',
+      ios: {
+        spinnerStyle: 'large',
+        imageDisplayMode: 'fit'
+      },
+      android: {
+        spinnerStyle: 'medium',
+        imageDisplayMode: 'fit',
+        fullscreen: false
+      }
+    })
+
+    const hideOptions = reactive<WSSplashScreenHideOptions>({
+      delay: 0,
+      fadeOutDuration: 200
+    })
 
     // computed
     const isIOS = computed(() => Capacitor.getPlatform() === 'ios')
     const isAndroid = computed(() => Capacitor.getPlatform() === 'android')
     const spinnerColorStyle = computed(() => ({
-      backgroundColor: parseColor(spinnerColor.value)
+      backgroundColor: parseColor(showOptions.spinnerColor ?? '')
     }))
     const showBackgroundStyle = computed(() => ({
-      backgroundColor: parseColor(backgroundColor.value)
+      backgroundColor: parseColor(showOptions.backgroundColor ?? '')
     }))
 
     // watch
-    watch(source, (value) => {
-      if (value !== '*') {
-        animated.value = false
+    watch(
+      () => showOptions.source,
+      (value) => {
+        if (value !== '*') {
+          showOptions.animated = false
+        }
       }
-    })
+    )
 
-    watch(autoHide, (hide) => {
-      if (hide) {
-        animated.value = false
+    watch(
+      () => showOptions.autoHide,
+      (hide) => {
+        if (hide) {
+          showOptions.animated = false
+        }
       }
-    })
+    )
 
     // event handlers
     async function onShow() {
       const splash = Plugins.WSSplashScreen as WSSplashScreenWeb
-      const options: WSSplashScreenShowOptions = {
-        source: source.value,
-        delay: showDelay.value,
-        fadeInDuration: showFadeInDuration.value,
-        showDuration: showDuration.value,
-        fadeOutDuration: showFadeOutDuration.value,
-        backgroundColor: backgroundColor.value,
-        autoHide: autoHide.value,
-        animated: animated.value,
-        showSpinner: showSpinner.value,
-        spinnerColor: spinnerColor.value,
-        ios: {
-          imageDisplayMode: iosImageMode.value,
-          spinnerStyle: iosSpinnerStyle.value
-        },
-        android: {
-          spinnerStyle: androidSpinnerStyle.value,
-          imageDisplayMode: androidImageMode.value,
-          fullscreen: false
-        }
-      }
 
       try {
-        await splash.show(options)
-        const duration = splash.toMilliseconds(showDuration.value)
+        await splash.show(toRaw(showOptions))
+        const duration = splash.toMilliseconds(
+          showOptions.showDuration as number
+        )
 
-        if (animated.value) {
+        if (showOptions.animated) {
           // If it's animated, after the show duration, animate it
           setTimeout(async () => {
             await splash.animate()
           }, duration)
-        } else if (!autoHide.value) {
+        } else if (!showOptions.autoHide) {
           // If autoHide is not on, hide manually after the show duration
           setTimeout(async () => {
-            const hideOptions: WSSplashScreenHideOptions = {
-              delay: hideDelay.value,
-              fadeOutDuration: hideFadeOutDuration.value
-            }
-
-            await splash.hide(hideOptions)
+            await splash.hide(toRaw(hideOptions))
           }, duration)
         }
       } catch (e) {
@@ -478,26 +467,12 @@ export default defineComponent({
     }
 
     return {
-      androidImageMode,
-      androidSpinnerStyle,
-      animated,
-      autoHide,
-      backgroundColor,
-      hideDelay,
-      hideFadeOutDuration,
-      iosImageMode,
-      iosSpinnerStyle,
+      hideOptions,
       isAndroid,
       isIOS,
       onShow,
+      showOptions,
       showBackgroundStyle,
-      showDelay,
-      showDuration,
-      showFadeInDuration,
-      showFadeOutDuration,
-      showSpinner,
-      source,
-      spinnerColor,
       spinnerColorStyle
     }
   }
