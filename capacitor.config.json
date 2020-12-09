@@ -7,7 +7,7 @@
   "hideLogs": false,
   "plugins": {
     "Keyboard": {
-      "resize": "none"
+      "resize": "body"
     },
     "SplashScreen": {
       "launchShowDuration": 0
