@@ -5,7 +5,7 @@ import router from './router'
 import { Plugins } from '@capacitor/core'
 import { IonicVue, isPlatform } from '@ionic/vue'
 import 'ws-capacitor-splashscreen'
-import { WSSplashScreenWeb } from 'ws-capacitor-splashscreen'
+import { WSSplashScreenWeb, listenToAppState } from 'ws-capacitor-splashscreen'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
@@ -41,7 +41,7 @@ const app = createApp(App).use(IonicVue, config).use(router)
 if (isPlatform('ios')) {
   const splashscreen = Plugins.WSSplashScreen as WSSplashScreenWeb
 
-  splashscreen.listenToAppState(true, {
+  listenToAppState(true, {
     async onSuspend() {
       await splashscreen.show({
         fadeInDuration: 0.2,
