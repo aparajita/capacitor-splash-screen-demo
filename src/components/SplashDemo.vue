@@ -51,7 +51,7 @@
         >
           <ion-label>Delay:</ion-label>
           <ion-input
-            v-model.number="showOptions.showDelay"
+            v-model.number="showOptions.delay"
             type="number"
           />
         </ion-item>
