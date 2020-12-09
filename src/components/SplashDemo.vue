@@ -100,9 +100,24 @@
         <ion-label>Background:</ion-label>
         <ion-input v-model="showOptions.backgroundColor" />
         <div
-          class="w-5 h-5 mr-2 border border-solid"
+          class="relative w-5 h-5 mr-2 border border-solid"
           :style="showBackgroundStyle"
-        />
+        >
+          <svg
+            id="backgroundSwatch"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-2 text-red-600"
+          >
+            <line
+              x1="0"
+              y1="0"
+              x2="20"
+              y2="20"
+              stroke="currentColor"
+            />
+          </svg>
+        </div>
       </ion-item>
 
       <div class="flex w-full">
@@ -168,6 +183,59 @@
       </div>
     </ion-item-group>
 
+    <ion-item-group
+      v-if="showOptions.source === 'max'"
+      class="mt-5"
+    >
+      <ion-item-divider>
+        <ion-label class="font-bold">
+          Image
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item
+        lines="none"
+        class="flex"
+      >
+        <ion-label class="flex-none mr-2">
+          Display mode:
+        </ion-label>
+        <ion-select
+          v-if="isIOS"
+          v-model="showOptions.ios.imageDisplayMode"
+          interface="action-sheet"
+          class="max-w-none pl-0"
+        >
+          <ion-select-option>fill</ion-select-option>
+          <ion-select-option>aspectFill</ion-select-option>
+          <ion-select-option>fit</ion-select-option>
+          <ion-select-option>center</ion-select-option>
+          <ion-select-option>top</ion-select-option>
+          <ion-select-option>bottom</ion-select-option>
+          <ion-select-option>left</ion-select-option>
+          <ion-select-option>right</ion-select-option>
+          <ion-select-option>topLeft</ion-select-option>
+          <ion-select-option>topRight</ion-select-option>
+          <ion-select-option>bottomLeft</ion-select-option>
+          <ion-select-option>bottomRight</ion-select-option>
+        </ion-select>
+
+        <ion-select
+          v-if="isAndroid"
+          v-model="showOptions.android.imageDisplayMode"
+          interface="action-sheet"
+          class="max-w-none pl-0"
+        >
+          <ion-select-option>fill</ion-select-option>
+          <ion-select-option>aspectFill</ion-select-option>
+          <ion-select-option>fit</ion-select-option>
+          <ion-select-option>fitTop</ion-select-option>
+          <ion-select-option>fitBottom</ion-select-option>
+          <ion-select-option>center</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-item-group>
+
     <ion-item-group class="mt-5">
       <ion-item-divider>
         <ion-label class="font-bold">
@@ -221,69 +289,39 @@
           <div
             class="w-5 h-5 mr-2 border border-solid"
             :style="spinnerColorStyle"
-          />
+          >
+            <svg
+              id="spinnerSwatch"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="invisible stroke-2 text-red-600"
+            >
+              <line
+                x1="0"
+                y1="0"
+                x2="20"
+                y2="20"
+                stroke="currentColor"
+              />
+            </svg>
+          </div>
         </ion-item>
       </div>
-    </ion-item-group>
-
-    <ion-item-group
-      v-if="showOptions.source === 'max'"
-      class="mt-5"
-    >
-      <ion-item-divider>
-        <ion-label class="font-bold">
-          Image
-        </ion-label>
-      </ion-item-divider>
-
-      <ion-item
-        lines="none"
-        class="flex"
-      >
-        <ion-label class="flex-none mr-2">
-          Display mode:
-        </ion-label>
-        <ion-select
-          v-if="isIOS"
-          v-model="showOptions.ios.imageDisplayMode"
-          interface="action-sheet"
-          class="max-w-none pl-0"
-        >
-          <ion-select-option>fill</ion-select-option>
-          <ion-select-option>aspectFill</ion-select-option>
-          <ion-select-option>fit</ion-select-option>
-          <ion-select-option>center</ion-select-option>
-          <ion-select-option>top</ion-select-option>
-          <ion-select-option>bottom</ion-select-option>
-          <ion-select-option>left</ion-select-option>
-          <ion-select-option>right</ion-select-option>
-          <ion-select-option>topLeft</ion-select-option>
-          <ion-select-option>topRight</ion-select-option>
-          <ion-select-option>bottomLeft</ion-select-option>
-          <ion-select-option>bottomRight</ion-select-option>
-        </ion-select>
-
-        <ion-select
-          v-if="isAndroid"
-          v-model="showOptions.android.imageDisplayMode"
-          interface="action-sheet"
-          class="max-w-none pl-0"
-        >
-          <ion-select-option>fill</ion-select-option>
-          <ion-select-option>aspectFill</ion-select-option>
-          <ion-select-option>fit</ion-select-option>
-          <ion-select-option>fitTop</ion-select-option>
-          <ion-select-option>fitBottom</ion-select-option>
-          <ion-select-option>center</ion-select-option>
-        </ion-select>
-      </ion-item>
     </ion-item-group>
   </div>
 </template>
 
 <script lang="ts">
 import { Capacitor, Plugins } from '@capacitor/core'
-import { computed, defineComponent, reactive, ref, toRaw, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  reactive,
+  ref,
+  toRaw,
+  watch
+} from 'vue'
 import {
   PluginError,
   WSSplashScreenHideOptions,
@@ -320,10 +358,13 @@ export default defineComponent({
   },
 
   setup() {
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    darkModeQuery.addEventListener('change', (query) => {
-      isDarkMode.value = query.matches
+    onMounted(() => {
+      if (isIOS.value) {
+        Plugins.Keyboard.setAccessoryBarVisible({ isVisible: true })
+      }
     })
+
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
     // ref
     const isDarkMode = ref(darkModeQuery.matches)
@@ -359,11 +400,27 @@ export default defineComponent({
     const isIOS = computed(() => Capacitor.getPlatform() === 'ios')
     const isAndroid = computed(() => Capacitor.getPlatform() === 'android')
     const spinnerColorStyle = computed(() => ({
-      backgroundColor: parseColor(showOptions.spinnerColor ?? '')
+      backgroundColor: parseColor(
+        'spinnerSwatch',
+        showOptions.spinnerColor || ''
+      )
     }))
     const showBackgroundStyle = computed(() => ({
-      backgroundColor: parseColor(showOptions.backgroundColor ?? '')
+      backgroundColor: parseColor(
+        'backgroundSwatch',
+        showOptions.backgroundColor || ''
+      )
     }))
+
+    function setDarkMode(this: MediaQueryList, ev: MediaQueryListEvent): any {
+      isDarkMode.value = this.matches
+    }
+
+    if (darkModeQuery.addEventListener) {
+      darkModeQuery.addEventListener('change', setDarkMode)
+    } else {
+      darkModeQuery.addListener(setDarkMode)
+    }
 
     // watch
     watch(
@@ -384,15 +441,19 @@ export default defineComponent({
       }
     )
 
+    const kDurationMsThreshold = 10
+
+    function toMilliseconds(value: number): number {
+      return value >= kDurationMsThreshold ? value : value * 1000
+    }
+
     // event handlers
     async function onShow() {
       const splash = Plugins.WSSplashScreen as WSSplashScreenWeb
 
       try {
         await splash.show(toRaw(showOptions))
-        const duration = splash.toMilliseconds(
-          showOptions.showDuration as number
-        )
+        const duration = toMilliseconds(showOptions.showDuration as number)
 
         if (showOptions.animated) {
           // If it's animated, after the show duration, animate it
@@ -406,6 +467,7 @@ export default defineComponent({
           }, duration)
         }
       } catch (e) {
+        console.log(e.message)
         await showErrorAlert(e)
       }
     }
@@ -435,16 +497,19 @@ export default defineComponent({
       return (err as PluginError).code !== undefined
     }
 
-    function parseColor(color: string): string {
+    function parseColor(id: string, color: string): string {
+      // If it's an invalid color, return transparent
+      let parsedColor = 'transparent'
+
       if (/^system(Background|Text)$/.test(color)) {
         const black = '#000'
         const white = '#fff'
 
         if (color === 'systemBackground') {
-          return isDarkMode.value ? black : white
+          parsedColor = isDarkMode.value ? black : white
+        } else {
+          parsedColor = isDarkMode.value ? white : black
         }
-
-        return isDarkMode.value ? white : black
       }
 
       if (color.startsWith('#')) {
@@ -458,12 +523,23 @@ export default defineComponent({
         case 8:
           // If it's the right length and all hex digits, return it
           if (/^[0-9a-fA-F]+$/.test(color)) {
-            return '#' + color
+            parsedColor = '#' + color
           }
       }
 
-      // Invalid color, return transparent
-      return 'transparent'
+      const swatch = document.getElementById(id)
+
+      if (swatch) {
+        const classList = swatch.classList
+
+        if (parsedColor === 'transparent') {
+          classList.remove('invisible')
+        } else {
+          classList.add('invisible')
+        }
+      }
+
+      return parsedColor
     }
 
     return {
