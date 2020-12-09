@@ -2,10 +2,10 @@ dependencies:
   '@capacitor/android': 2.4.4_@capacitor+core@2.4.4
   '@capacitor/core': 2.4.4
   '@capacitor/ios': 2.4.4_@capacitor+core@2.4.4
-  '@ionic/core': 5.5.1
+  '@ionic/core': 5.5.2
   '@ionic/pwa-elements': 3.0.1
-  '@ionic/vue': 5.5.1
-  '@ionic/vue-router': 5.5.1
+  '@ionic/vue': 5.5.2
+  '@ionic/vue-router': 5.5.2
   core-js: 3.8.1
   ionicons: 5.2.3
   tailwindcss: /@tailwindcss/postcss7-compat/2.0.1
@@ -1095,30 +1095,30 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-zN69TnSr0viRSU6cEDIcuPcP67QcpQ6uHACg58FiN9PDrU6SLyGW3MR4tiISbYxy1kDWAVPwD+XwQTWE5cigAA==
-  /@ionic/core/5.5.1:
+  /@ionic/core/5.5.2:
     dependencies:
       ionicons: 5.2.3
       tslib: 1.14.1
     dev: false
     resolution:
-      integrity: sha512-ytsweRqFeupuVzMJydjh0w0RMjlI+GkHwXQ5SwVuto+cRxA9aKPkcxELzOWYRto3E00jbXFBThGhoL+jNUsK7g==
+      integrity: sha512-rOfPj8D5NRWdOYYulNTdKtMAMURfmutDQ3ciA3L7daCooG3MWt2/0siiL6rcZFMxfG7KDxHctuwVwYoC1mPuhg==
   /@ionic/pwa-elements/3.0.1:
     dev: false
     resolution:
       integrity: sha512-X3wQmiNBx3umAjIZTkDEouOLE907ZhPm/qD844BrQe47/Qf++r35DyedbPODl5cODrgY05xBiOQiScGliS2k9Q==
-  /@ionic/vue-router/5.5.1:
+  /@ionic/vue-router/5.5.2:
     dependencies:
       path-to-regexp: 6.2.0
     dev: false
     resolution:
-      integrity: sha512-+vnfsYVLXYniNAdxzkhALC0djqEaFqCJ1wuE7xbM4raOBsvHOXKM/k+s6pfK8zgS0mgH2EuQZRV3+HRXBOAvOg==
-  /@ionic/vue/5.5.1:
+      integrity: sha512-jAnRic1edL+4WuWfTkQ2aWfVsbuZHkMNmugw+z1egDYN1KjmMBwmlX80DtSIq7bSAC3GPtvxaQYqZWwDyiCtFQ==
+  /@ionic/vue/5.5.2:
     dependencies:
-      '@ionic/core': 5.5.1
+      '@ionic/core': 5.5.2
       ionicons: 5.2.3
     dev: false
     resolution:
-      integrity: sha512-tpzeFRvPWxi9zdXSBlrdDVj+yEQ/SIZusehQ9Bpw2DkX1DF+U0fQoeBKwJ8oDVYECcD4XVy2o2iP7VpQ9nHV2w==
+      integrity: sha512-1uiYGVyFQjiiVOgG3CLEHBdNsU7P1M77hEAIa9shb73g5DOJkUa03WX0gf/a2aAdzsiVVimDofelLwtkrrbBmg==
   /@mrmlnc/readdir-enhanced/2.2.1:
     dependencies:
       call-me-maybe: 1.0.1
@@ -9911,10 +9911,10 @@ specifiers:
   '@capacitor/cli': 2.4.4
   '@capacitor/core': 2.4.4
   '@capacitor/ios': ^2.4.4
-  '@ionic/core': 5.5.1
+  '@ionic/core': 5.5.2
   '@ionic/pwa-elements': ^3.0.1
-  '@ionic/vue': 5.5.1
-  '@ionic/vue-router': 5.5.1
+  '@ionic/vue': 5.5.2
+  '@ionic/vue-router': 5.5.2
   '@types/node': ^14.14.11
   '@typescript-eslint/eslint-plugin': ^4.9.1
   '@typescript-eslint/parser': ^4.9.1
