@@ -6,7 +6,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content
-      class="ion-padding-vertical"
+      class="w-full h-full ion-padding-vertical"
+      scroll-y="true"
     >
       <SplashDemo />
     </ion-content>
