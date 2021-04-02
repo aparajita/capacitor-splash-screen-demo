@@ -327,7 +327,7 @@ import {
   WSSplashScreenHideOptions,
   WSSplashScreenShowOptions,
   WSSplashScreenWeb
-} from 'ws-capacitor-splashscreen'
+} from '@aparajita/capacitor-splash-screen'
 
 import {
   alertController,

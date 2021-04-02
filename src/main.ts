@@ -4,8 +4,10 @@ import router from './router'
 
 import { Plugins } from '@capacitor/core'
 import { IonicVue, isPlatform } from '@ionic/vue'
-import 'ws-capacitor-splashscreen'
-import { WSSplashScreenWeb, listenToAppState } from 'ws-capacitor-splashscreen'
+import {
+  WSSplashScreenWeb,
+  listenToAppState
+} from '@aparajita/capacitor-splash-screen'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'

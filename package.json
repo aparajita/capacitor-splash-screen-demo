@@ -1,5 +1,5 @@
 {
-  "name": "ws-capacitor-splashscreen-demo",
+  "name": "@aparajita/capacitor-splash-screen-demo",
   "version": "1.0.0",
   "private": true,
   "scripts": {

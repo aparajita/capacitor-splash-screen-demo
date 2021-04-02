@@ -2,5 +2,5 @@
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
 
-include ':ws-capacitor-splashscreen'
-project(':ws-capacitor-splashscreen').projectDir = new File('../node_modules/ws-capacitor-splashscreen/android')
+include ':aparajita-capacitor-splash-screen'
+project(':aparajita-capacitor-splash-screen').projectDir = new File('../node_modules/@aparajita/capacitor-splash-screen/android')

@@ -1,6 +1,6 @@
-# Super Splash Screen demo
+# capacitor-splash-screen demo
 
-This [Ionic](https://ionicframework.com) app is a test bed for all of the features of [Super Splash Screen](https://github.com/aparajita/ws-capacitor-splashscreen).
+This [Ionic](https://ionicframework.com)/[Capacitor](https://capacitorjs.com) app is a test bed for all of the features of [@aparajita/capacitor-splash-screen](https://github.com/aparajita/capacitor-splash-screen).
 
 ## Installation
 

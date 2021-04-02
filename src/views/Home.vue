@@ -24,7 +24,7 @@ import {
   IonToolbar
 } from '@ionic/vue'
 import { onMounted } from 'vue'
-import { WSSplashScreenWeb } from 'ws-capacitor-splashscreen'
+import { WSSplashScreenWeb } from '@aparajita/capacitor-splash-screen'
 import SplashDemo from '@/components/SplashDemo.vue'
 
 export default {

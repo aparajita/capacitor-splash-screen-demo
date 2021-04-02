@@ -10,9 +10,9 @@ dependencies:
   ionicons: 5.2.3
   tailwindcss: /@tailwindcss/postcss7-compat/2.0.1
   tslib: 2.0.3
+  '@aparajita/capacitor-splash-screen': 1.0.1
   vue: 3.0.4
   vue-router: 4.0.1_vue@3.0.4
-  ws-capacitor-splashscreen: 'link:../ws-capacitor-splashscreen'
 devDependencies:
   '@capacitor/cli': 2.4.4
   '@types/node': 14.14.11
