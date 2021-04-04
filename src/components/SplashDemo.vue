@@ -88,7 +88,7 @@
           <ion-input
             v-model.number="showOptions.fadeOutDuration"
             type="number"
-            :disabled="!showOptions.autoHide"
+            :disabled="!showOptions.autoHide || showOptions.animated"
           />
         </ion-item>
       </div>
