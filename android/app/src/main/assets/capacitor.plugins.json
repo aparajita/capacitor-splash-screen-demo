@@ -1,0 +1,30 @@
+[
+	{
+		"pkg": "@aparajita/capacitor-dark-mode",
+		"classpath": "com.aparajita.capacitor.darkmode.DarkModeNative"
+	},
+	{
+		"pkg": "@aparajita/capacitor-logger",
+		"classpath": "com.aparajita.capacitor.logger.LoggerBridge"
+	},
+	{
+		"pkg": "@aparajita/capacitor-splash-screen",
+		"classpath": "com.aparajita.capacitor.splashscreen.SplashScreen"
+	},
+	{
+		"pkg": "@capacitor/app",
+		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
+	},
+	{
+		"pkg": "@capacitor/haptics",
+		"classpath": "com.capacitorjs.plugins.haptics.HapticsPlugin"
+	},
+	{
+		"pkg": "@capacitor/keyboard",
+		"classpath": "com.capacitorjs.plugins.keyboard.KeyboardPlugin"
+	},
+	{
+		"pkg": "@capacitor/status-bar",
+		"classpath": "com.capacitorjs.plugins.statusbar.StatusBarPlugin"
+	}
+]

@@ -1,13 +1,9 @@
+import { DarkMode } from '@aparajita/capacitor-dark-mode'
+import { IonicVue, isPlatform } from '@ionic/vue'
 import { createApp } from 'vue'
 import App from './App.vue'
+// eslint-disable-next-line import/order
 import router from './router'
-
-import { Plugins } from '@capacitor/core'
-import { IonicVue, isPlatform } from '@ionic/vue'
-import {
-  WSSplashScreenWeb,
-  listenToAppState
-} from '@aparajita/capacitor-splash-screen'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
@@ -15,49 +11,32 @@ import '@ionic/vue/css/core.css'
 /* Basic CSS for apps built with Ionic */
 import '@ionic/vue/css/normalize.css'
 import '@ionic/vue/css/structure.css'
-import '@ionic/vue/css/typography.css'
+// import '@ionic/vue/css/typography.css'
 
 /* Optional CSS utils that can be commented out */
 import '@ionic/vue/css/padding.css'
-import '@ionic/vue/css/float-elements.css'
-import '@ionic/vue/css/text-alignment.css'
-import '@ionic/vue/css/text-transformation.css'
-import '@ionic/vue/css/flex-utils.css'
-import '@ionic/vue/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
 import './assets/css/styles.pcss'
 
-const config: { [key: string]: any } = {}
+const config: Record<string, unknown> = {}
 
-if (isPlatform('desktop')) {
+if (!isPlatform('android')) {
   config.mode = 'ios'
 }
 
 const app = createApp(App).use(IonicVue, config).use(router)
 
-// Show the spash screen when we resume.
-// On Android the suspend app state change comes too late,
-// we can't seem to change the screen at all.
-if (isPlatform('ios')) {
-  const splashscreen = Plugins.WSSplashScreen as WSSplashScreenWeb
-
-  listenToAppState(true, {
-    async onSuspend() {
-      await splashscreen.show({
-        fadeInDuration: 0.2,
-        autoHide: false,
-        backgroundColor: 'systemBackground'
+router
+  .isReady()
+  .then(() => {
+    DarkMode.init({
+      syncStatusBar: true
+    })
+      .then(() => {
+        app.mount('#app')
       })
-    },
-
-    async onResume() {
-      await splashscreen.animate({ delay: 0.2 })
-    }
+      .catch(console.error)
   })
-}
-
-router.isReady().then(() => {
-  app.mount('#app')
-})
+  .catch(console.error)

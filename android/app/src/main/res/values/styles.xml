@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+    <!-- This style MUST appear with this name -->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- This is the standard Ionic config -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
-        <item name="android:windowDisablePreview">true</item>
+
+        <!-- Ugly, but proves I am handling colors correctly :^) -->
+        <item name="android:statusBarColor">@android:color/holo_blue_dark</item>
+        <item name="android:navigationBarColor">@android:color/holo_green_dark</item>
     </style>
 
-    <style name="AppTheme.NoActionBarLaunch" parent="AppTheme.NoActionBar">
-        <item name="android:windowDisablePreview">true</item>
+    <!-- This style MUST appear with this name -->
+    <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        // Set this to the single background color of the splash screen.
+        // If you want to change the background color in dark mode, create
+        // a night version of the color.
+        <item name="windowSplashScreenBackground">@color/systemBackground</item>
+
+        // Set this to a VectorDrawable. On API 31+ it may animated,
+        // in which case it will be animated during launch.
+        // See https://developer.android.com/guide/topics/ui/splash-screen
+        // for info on size limits.
+        <item name="windowSplashScreenAnimatedIcon">@drawable/launchscreen</item>
+
+        // Set this if the parent="Theme.SplashScreen.IconBackground".
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">@null</item>
+
+        // If you want a branding image to appear at the bottom, set it here.
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="31">@null</item>
+
+        // Set the main app theme here (required).
+        <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
     </style>
 </resources>

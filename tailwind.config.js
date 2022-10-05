@@ -1,19 +1,16 @@
+/** @type {import('tailwindcss/types').Config} */
+
 module.exports = {
-  purge: {
-    mode: 'layers',
-    layers: ['utilities'],
-    content: ['./src/**/*.html', './src/**/*.vue']
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{html,vue,ts}'],
+  darkMode: 'class',
   theme: {
-    extend: {
-      width: {
-        fit: 'fit-content'
-      }
-    }
+    extend: {}
   },
   variants: {
     extend: {}
+  },
+  corePlugins: {
+    preflight: false
   },
   plugins: []
 }

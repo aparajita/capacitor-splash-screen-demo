@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  App
+
+  Created by Aparajita on 8/29/22.
+  
+*/
+
+"CFBundleDisplayName" = "DemoSplash";
+"UILaunchStoryboardName" = "LaunchScreen_pt.storyboard";

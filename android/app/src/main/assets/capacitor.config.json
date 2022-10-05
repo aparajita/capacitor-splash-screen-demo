@@ -1,25 +1,18 @@
 {
-  "appId": "com.aparajita.capacitor.splashscreendemo",
-  "appName": "Splash",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "dist",
-  "hideLogs": false,
-  "plugins": {
-    "Keyboard": {
-      "resize": "body"
-    },
-    "SplashScreen": {
-      "launchShowDuration": 0
-    },
-    "WSSplashScreen": {
-      "animated": true,
-      "source": "*",
-      "backgroundColor": "systemBackground",
-      "android": {
-        "fullscreen": false
-      }
-    }
-  },
-  "cordova": {}
+	"appId": "com.aparajita.capacitor.splashscreen",
+	"appName": "Splash",
+	"loggingBehavior": "production",
+	"webDir": "dist",
+	"plugins": {
+		"Keyboard": {
+			"resize": "ionic"
+		},
+		"Logger": {
+			"level": "debug",
+			"useSyslog": false
+		},
+		"SplashScreen": {
+			"showDuration": 700
+		}
+	}
 }

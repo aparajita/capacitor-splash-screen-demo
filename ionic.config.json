@@ -1,7 +1,7 @@
 {
-  "name": "Splash",
+  "name": "capacitor-splash-screen-demo",
   "integrations": {
     "capacitor": {}
   },
-  "type": "vue"
+  "type": "custom"
 }

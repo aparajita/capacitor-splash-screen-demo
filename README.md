@@ -1,36 +1,39 @@
-# capacitor-splash-screen demo
+<div class="markdown-body">
 
-This [Ionic](https://ionicframework.com)/[Capacitor](https://capacitorjs.com) app is a test bed for all of the features of [@aparajita/capacitor-splash-screen](https://github.com/aparajita/capacitor-splash-screen).
+# capacitor-splash-screen-demo&nbsp;&nbsp;[![GitHub version](https://badge.fury.io/gh/aparajita%2Fcapacitor-splash-screen-demo.svg)](https://badge.fury.io/gh/aparajita%2Fcapacitor-splash-screen-demo)
+
+This [Ionic](https://ionicframework.com)/[Capacitor 4](https://capacitorjs.com) application provides a demo of all of the capacibilities of the [capacitor-splash-screen](https://github.com/aparajita/capacitor-splash-screen) Capacitor plugin. When creating your own splash screens, you can use this application both as a template and as a workshop to tweak the animations and timings to your liking.
+
+<video src="https://user-images.githubusercontent.com/22218/193976312-fbbddb68-d59c-4368-9af3-2503473c0eb5.mov
+" width="444" />
 
 ## Installation
 
 ```shell
 git clone https://github.com/aparajita/capacitor-splash-screen-demo.git
 cd capacitor-splash-screen-demo
-pnpm install  # npm install
-pnpm build  # npm run build
-cap sync
+pnpm install
 ```
 
 ## Usage
 
-To run the app on iOS:
+To launch the demo in Xcode or Android Studio:
 
 ```shell
-pnpm ios  # npm run ios
+pnpm ios.prod  # npm run ios.prod
+pnpm android.prod  # npm run android.prod
 ```
 
-To run the app on Android:
+Note that all duration values in the demo may be specified in seconds or milliseconds.
 
-```shell
-pnpm android  # npm run android
-```
+## Features
 
-### Interface
+The demo illustrates how to implement the following plugin features:
 
-Play around with different options and click "Show". A few things of note:
+- Suspend/resume listener to display/hide a splash screen
+- Custom animation
+- Localization
 
-* Durations may be specified as seconds (anything < 10) or as milliseconds (anything >= 10).
-* Background colors may be RGB[A], RRGGBB[AA], `systemBackground`, or `systemText`. See `WSSplashScreenColor` for more information. To the right of the color input is a color swatch with the current color. If the input is empty or an invalid color, the color is effectively transparent.
-* On iOS, the launch screen and storyboard adapt to dark/light mode.
-* Options that are not active based on other options are hidden or disabled.
+Enjoy!
+
+</div>

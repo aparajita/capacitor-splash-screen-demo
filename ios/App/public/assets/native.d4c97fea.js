@@ -1,0 +1,1 @@
+import{SplashScreenBase as s}from"./base.61f385d1.js";import"./index.7966e040.js";class r extends s{constructor(e){super(),this.show=e.show,this.hide=e.hide,this.animate=e.animate}}export{r as SplashScreen};
