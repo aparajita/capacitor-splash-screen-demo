@@ -1,6 +1,6 @@
 {
   "name": "@aparajita/capacitor-splash-screen-demo",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An Ionic/Vue demo of the @aparajita/capacitor-splash-screen plugin",
   "private": true,
   "author": "Aparajita Fishman",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@aparajita/capacitor-dark-mode": "^3.0.3",
     "@aparajita/capacitor-logger": "^3.1.1",
-    "@aparajita/capacitor-splash-screen": "link:../capacitor-splash-screen",
+    "@aparajita/capacitor-splash-screen": "^2.0.0",
     "@capacitor/android": "^4.3.0",
     "@capacitor/app": "^4.0.1",
     "@capacitor/core": "^4.3.0",
