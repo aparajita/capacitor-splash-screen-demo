@@ -52,6 +52,7 @@ extension AppDelegate {
     originalTransform = logo.transform
 
     // parameters: (relative delay, relative duration, closure expression)
+    // swiftlint:disable:next large_tuple
     let keyFrames: [(Double, Double, () -> Void)] = [
       (0, 0.3, { logo.transform = originalTransform.scaledBy(x: 0.7, y: 0.7) }),
       (0.3, 0.7, { logo.transform = originalTransform.scaledBy(x: 5, y: 5) }),

@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@aparajita/capacitor-dark-mode': ^3.0.3
   '@aparajita/capacitor-logger': ^3.1.1
-  '@aparajita/capacitor-splash-screen': ^2.0.0
+  '@aparajita/capacitor-splash-screen': ^2.0.2
   '@aparajita/eslint-config-vue': ^1.0.6
   '@aparajita/prettier-config': ^1.0.0
   '@aparajita/tailwind-ionic': ^1.1.1
@@ -47,7 +47,7 @@ specifiers:
 dependencies:
   '@aparajita/capacitor-dark-mode': 3.0.3
   '@aparajita/capacitor-logger': 3.1.1_@capacitor+core@4.3.0
-  '@aparajita/capacitor-splash-screen': 2.0.0
+  '@aparajita/capacitor-splash-screen': 2.0.2
   '@capacitor/android': 4.3.0_@capacitor+core@4.3.0
   '@capacitor/app': 4.0.1_@capacitor+core@4.3.0
   '@capacitor/core': 4.3.0
@@ -114,8 +114,8 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@aparajita/capacitor-splash-screen/2.0.0:
-    resolution: {integrity: sha512-GB5lteh6aC7B/1/pPsKcPlfb5TEbzhPeksAXrOCpoHkSj+AJ5JECMJ8YjRZnpL6dDLYjpg8m6eVNQj64maboEw==}
+  /@aparajita/capacitor-splash-screen/2.0.2:
+    resolution: {integrity: sha512-a4sWtL2T9SW4GF/xQd5toYY7yyGq24ap/S2fFFfl4BSDTpBNu3T7IjMLLj59CiqE/ovMcwyNowItjoML7tkYnQ==}
     engines: {node: '>=16.15.1'}
     dependencies:
       '@aparajita/capacitor-logger': 3.1.1_@capacitor+core@4.3.0
